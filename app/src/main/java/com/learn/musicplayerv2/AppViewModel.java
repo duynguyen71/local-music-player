@@ -38,7 +38,6 @@ public class AppViewModel extends ViewModel {
         super.onCleared();
     }
 
-    //getters setters
     public MutableLiveData<MediaPlayer> getMPLiveDate() {
         return mediaPlayer;
     }
@@ -59,8 +58,5 @@ public class AppViewModel extends ViewModel {
         currentSong.setValue(song);
     }
 
-//    public void setPlayingPosition(int currentPos) {
-//        this.currentPos = currentPos;
-//    }
 
 }

@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     View playSongController;
     ImageButton playBtn, nextBtn, prevBtn;
     SeekBar seekBar;
-    //    ProgressBar progressBar;
     AppViewModel appViewModel;
     NavController navController;
     Handler handler = new Handler();
