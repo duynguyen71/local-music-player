@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.learn.musicplayerv2.ui.libralry.LibraryFragment"
+        android:label="@string/title_library"
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_navigation_libraryFragment_to_playerFragment"
+            app:destination="@id/playerFragment2"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_discover"
+        android:name="com.learn.musicplayerv2.ui.discover.DiscoverFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_discover">
+        <action
+            android:id="@+id/action_navigation_discover_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.learn.musicplayerv2.ui.setting.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/playerFragment2"
+        android:name="com.learn.musicplayerv2.ui.player.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player">
+        <action
+            android:id="@+id/action_playerFragment2_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.learn.musicplayerv2.ui.playlist.PlaylistFragment"
+        android:label="PlaylistFragment">
+        <action
+            android:id="@+id/action_playlistFragment_to_navigation_discover"
+            app:destination="@id/navigation_discover" />
+        <action
+            android:id="@+id/playlist_to_player"
+            app:destination="@id/playerFragment2" />
+    </fragment>
+</navigation>

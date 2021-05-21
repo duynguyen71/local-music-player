@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/tvActionTtile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="TextView"
+                android:textColor="@color/primary"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etNewPlaylistName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_rounded"
+                android:elevation="4dp"
+                android:ems="10"
+                android:hint="Enter new playlist name"
+                android:inputType="textCapWords|textCapSentences|textMultiLine"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/btnSavePlaylist"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_rounded"
+                android:text="Save"
+                android:textColor="@color/text" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

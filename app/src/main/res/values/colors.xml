@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="a">#3A1C71</color>
+    <color name="b">#D76D77</color>
+    <color name="d">#34223A</color>
+
+
+    <color name="primary">#FF793F</color>
+    <color name="text">#EFEDFF</color>
+    <color name="song_artist">#747D8C</color>
+    <color name="song_title">#3F4372</color>
+    <color name="button">#747D8C</color>
+    <color name="un_selected">#FFB798</color>
+    <color name="three_dots_options">#656565</color>
+
+
+</resources>
