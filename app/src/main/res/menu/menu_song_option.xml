@@ -3,6 +3,4 @@
     <item
         android:id="@+id/itemAddToPlaylist"
         android:title="Add To Playlist" />
-    <item android:title="Item" />
-    <item android:title="Item" />
 </menu>

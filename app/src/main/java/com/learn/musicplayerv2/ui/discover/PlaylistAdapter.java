@@ -10,32 +10,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.learn.musicplayerv2.R;
+import com.learn.musicplayerv2.db.AppDatabase;
 import com.learn.musicplayerv2.entity.PlaylistEntity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyHolder> {
 
 
-    List<PlaylistEntity> playlists;
-    Context context;
+    private List<PlaylistEntity> playlists;
+    private Context context;
 
-    @Setter
-    OnPlaylistItemClickListener onPlaylistItemClickListener;
-    @Setter
-    OnPlaylistOptionsClickListener onPlaylistOptionsClickListener;
+    private OnPlaylistItemClickListener onPlaylistItemClickListener;
+    private OnPlaylistOptionsClickListener onPlaylistOptionsClickListener;
 
     public PlaylistAdapter(List<PlaylistEntity> playlists, Context context) {
         this.playlists = playlists;
         this.context = context;
     }
 
-    @NonNull
-    @NotNull
     @Override
     public PlaylistAdapter.MyHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(context).inflate(R.layout.playlist_item, parent, false);
@@ -45,8 +45,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull PlaylistAdapter.MyHolder holder, int playlistPosition) {
-        PlaylistEntity item = playlists.get(playlistPosition);
-        holder.tvPlaylistName.setText(item.getPlaylistName());
+        PlaylistEntity playlist = playlists.get(playlistPosition);
+        holder.tvPlaylistName.setText(playlist.getPlaylistName());
+//       int count =  db.playlistDao().countSongs(playlist.getPlaylistId());
+//        holder.tvSongCount.setText(count!=0?count+" songs":"0 song");
         holder.tvPlaylistName.setOnClickListener(v -> {
             if (onPlaylistItemClickListener != null) {
                 onPlaylistItemClickListener.onPlaylistItemClick(v, playlistPosition);
@@ -69,15 +71,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.MyHold
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView tvPlaylistName;
-        TextView tvPlaylistOption;
-        TextView tvSongCount;
+        private TextView tvPlaylistName;
+        private TextView tvPlaylistOption;
+        private TextView tvSongCount;
 
         public MyHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             tvPlaylistName = itemView.findViewById(R.id.tvPlaylistName);
             tvPlaylistOption = itemView.findViewById(R.id.tv_playlistOptions);
-            tvSongCount = itemView.findViewById(R.id.tv_songCount);
+            tvSongCount = itemView.findViewById(R.id.tv_playlistSongCount);
         }
 
     }

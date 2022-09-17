@@ -1,4 +1,4 @@
-package com.learn.musicplayerv2.ui.libralry;
+package com.learn.musicplayerv2.ui.library;
 
 import android.app.AlertDialog;
 import android.os.Build;
@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -40,34 +39,30 @@ import java.util.List;
 
 public class LibraryFragment extends Fragment implements LibraryViewAdapter.OnSongClickListener, LibraryViewAdapter.OnSongOptionsClickListener {
 
-    static final String TAG = "TEST";
-    RecyclerView songListView;
-    LibraryViewAdapter adapter;
-    FloatingActionButton btnNewPlaylist;
-    ProgressBar progressBar;
-    AppDatabase db;
-    EditText etFilter;
+    private static final String TAG = "TEST";
+    private RecyclerView songListView;
+    private LibraryViewAdapter adapter;
+    private FloatingActionButton btnNewPlaylist;
+    private ProgressBar progressBar;
+    private AppDatabase db;
+    private EditText etFilter;
 
-    PlaylistDao playlistDao;
-    List<PlaylistEntity> playlists;
-    String[] playlistName;
-    boolean[] checkedItems;
-    SongDao songDao;
-    PlaylistEditDialog playlistEditDialog;
-    final int actionChangeToPlayer = R.id.action_navigation_libraryFragment_to_playerFragment;
-    List<Integer> checkedPlaylistIds;
-    PlaySongService service;
+    private PlaylistDao playlistDao;
+    private List<PlaylistEntity> playlists;
+    private String[] playlistName;
+    private boolean[] checkedItems;
+    private SongDao songDao;
+    private PlaylistEditDialog playlistEditDialog;
+    private final int actionChangeToPlayer = R.id.action_navigation_libraryFragment_to_playerFragment;
+    private List<Integer> checkedPlaylistIds;
+    private PlaySongService service;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Thread thread1 = new Thread(() -> {
         db = AppDatabase.getInstance(getActivity().getApplicationContext());
         playlistDao = db.playlistDao();
         songDao = db.songDao();
-
-//        });
-//        thread1.start();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -107,7 +102,6 @@ public class LibraryFragment extends Fragment implements LibraryViewAdapter.OnSo
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void callPlayingService(int position) {
         AppCache.PLAYING_PLAYLIST = AppCache.LIBRARY_SONGS;
@@ -133,7 +127,6 @@ public class LibraryFragment extends Fragment implements LibraryViewAdapter.OnSo
 
     }
 
-    //TODO : change
     @Override
     public void showPopup(View view, int position) {
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -199,7 +192,6 @@ public class LibraryFragment extends Fragment implements LibraryViewAdapter.OnSo
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 String str = s.toString();
                 if (adapter != null) {
                     adapter.getFilter().filter(str);

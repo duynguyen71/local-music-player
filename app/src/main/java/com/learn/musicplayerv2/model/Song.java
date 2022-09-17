@@ -1,12 +1,9 @@
 package com.learn.musicplayerv2.model;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
@@ -17,9 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-//        (indices =
-//        {@Index(value = "playlistId",
-//                unique = true)})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,11 +26,8 @@ public class Song {
     private String name;
     private String artist;
     private String album;
-    private int albumId;
+    private Long albumId;
     private String uriPath;
-//    @Ignore
-//    private Uri uri;
-
     private int playlistId;
 
 
@@ -65,7 +56,6 @@ public class Song {
                 ", album='" + album + '\'' +
                 ", albumId='" + albumId + '\'' +
                 ", uriPath='" + uriPath + '\'' +
-
                 '}';
     }
 }

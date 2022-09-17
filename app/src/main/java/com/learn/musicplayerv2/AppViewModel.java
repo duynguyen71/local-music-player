@@ -19,9 +19,9 @@ import lombok.Setter;
 public class AppViewModel extends ViewModel {
 
      MutableLiveData<MediaPlayer> mediaPlayer = new MutableLiveData<MediaPlayer>();
+
      MutableLiveData<Song> currentSong = new MutableLiveData<Song>();
-     final String TAG = getClass().getSimpleName();
-//     int currentPos;
+
      static AppViewModel appViewModel = null;
 
     public static AppViewModel getInstance() {

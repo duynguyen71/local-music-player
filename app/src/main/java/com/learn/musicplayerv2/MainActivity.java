@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -38,30 +37,27 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView songName, songArtist;
-    View playSongController;
-    ImageButton playBtn, nextBtn, prevBtn;
-    SeekBar seekBar;
-    AppViewModel appViewModel;
-    NavController navController;
-    Handler handler = new Handler();
+    private TextView songName, songArtist;
+    private View playSongController;
+    private ImageButton playBtn, nextBtn, prevBtn;
+    private SeekBar seekBar;
+    private AppViewModel appViewModel;
+    private NavController navController;
+    private Handler handler = new Handler();
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestPermission();
         registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        checkVersion();
         initViews();
         appViewModel = AppViewModel.getInstance();
         if (appViewModel == null) {
             appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
             AppViewModel.setInstance(appViewModel);
         }
-
-
         BottomNavigationView navView = getBottomNavigationView();
 
         playSongController.setVisibility(View.GONE);
@@ -78,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        registerClickLisnterner();
+        registerClickListener();
         registerLiveDataListener();
 
 
@@ -96,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         return navView;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     void initViews() {
         songName = findViewById(R.id.cName);
         songArtist = findViewById(R.id.cArtist);
@@ -106,11 +101,9 @@ public class MainActivity extends AppCompatActivity {
         nextBtn = findViewById(R.id.cNext);
         prevBtn = findViewById(R.id.cPrev);
         seekBar = findViewById(R.id.seekBar2);
-//            progressBar = findViewById(R.id.progressBar);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void registerClickLisnterner() {
+    private void registerClickListener() {
 
         nextBtn.setOnClickListener(v -> PlaySongService.getInstance().next());
         prevBtn.setOnClickListener(v -> PlaySongService.getInstance().prev());
@@ -184,9 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    void checkVersion() {
+    void requestPermission() {
         if (SDK_INT >= M) {
             if (checkSelfPermission(READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                 requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
@@ -223,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Toast.makeText(this, "ON RESUME", LENGTH_SHORT).show();
+//        Toast.makeText(this, "ON RESUME", LENGTH_SHORT).show();
         super.onResume();
     }
 
@@ -231,12 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         switch (Navigation.findNavController(this, R.id.nav_host_fragment).getCurrentDestination().getId()) {
-//            case R.id.playerFragment2: {
-//                Toast.makeText(this, "PLAYER FRAGMENT", LENGTH_SHORT).show();
-//                break;
-//            }
             case R.id.navigation_home: {
                 if (doubleBackToExitPressedOnce) {
                     super.onBackPressed();

@@ -1,8 +1,7 @@
-package com.learn.musicplayerv2.ui.libralry;
+package com.learn.musicplayerv2.ui.library;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,19 +25,18 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.SongViewHolder> implements Filterable {
 
-    Context context;
-    List<Song> songList;
-    int action;
+    private Context context;
+    private List<Song> songList;
+    private int action;
 
-    List<Song> filteredSongList = new ArrayList<>();
+    private List<Song> filteredSongList = new ArrayList<>();
 
-    @Setter
     private OnSongOptionsClickListener onSongOptionsClickListener;
 
-    @Setter
-    @Getter
     private OnSongClickListener onSongClickListener;
 
     public LibraryViewAdapter(Context context, List<Song> songList, int action) {
@@ -55,22 +52,15 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         return new SongViewHolder(root);
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
         Song item = songList.get(position);
         holder.tvSongName.setText(item.getName());
         holder.tvSongArtist.setText(item.getArtist());
-
         Bitmap bitmap = AppUtil.toBitmap(context, item.getAlbumId());
         if (bitmap != null) {
             Glide.with(context).load(bitmap).into(holder.ivSongImage);
         }
-//        else {
-//            Glide.with(context).load(R.drawable.ic_logo_200).into(holder.ivSongImage);
-//        }
-
         holder.infoContent.setOnClickListener(v -> {
             if (onSongClickListener != null) {
                 onSongClickListener.callPlayingService(position);

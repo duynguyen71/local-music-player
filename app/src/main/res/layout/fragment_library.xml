@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.libralry.LibraryFragment">
+    tools:context=".ui.library.LibraryFragment">
 
     <EditText
         android:id="@+id/etFilter"
@@ -19,7 +19,7 @@
         android:cursorVisible="false"
         android:elevation="4dp"
         android:ems="10"
-        android:hint="filter"
+        android:hint="Search song by name"
         android:inputType="text"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
@@ -52,6 +52,7 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="TODO"
+        app:backgroundTint="#FF6E40"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />

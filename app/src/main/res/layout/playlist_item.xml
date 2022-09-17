@@ -29,12 +29,13 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/tv_songCount"
+            android:id="@+id/tv_playlistSongCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="empty"
-            android:textColor="@color/song_artist" />
+            android:text="0  songs"
+            android:textColor="@color/song_artist"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <TextView

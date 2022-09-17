@@ -1,10 +1,7 @@
 package com.learn.musicplayerv2.ui.playlist;
 
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,10 +26,10 @@ import com.learn.musicplayerv2.R;
 import com.learn.musicplayerv2.dao.PlaylistDao;
 import com.learn.musicplayerv2.dao.SongDao;
 import com.learn.musicplayerv2.db.AppDatabase;
-import com.learn.musicplayerv2.entity.relation.PlaylistWithSongs;
+import com.learn.musicplayerv2.entity.PlaylistWithSongs;
 import com.learn.musicplayerv2.model.Song;
 import com.learn.musicplayerv2.service.PlaySongService;
-import com.learn.musicplayerv2.ui.libralry.LibraryViewAdapter;
+import com.learn.musicplayerv2.ui.library.LibraryViewAdapter;
 import com.learn.musicplayerv2.utils.AppUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -49,18 +45,19 @@ public class PlaylistFragment extends Fragment implements LibraryViewAdapter.OnS
 
     public static final String PLAYLIST_ID = "playlistId";
     private ProgressBar progressBar;
-    RecyclerView playlistView;
-    LibraryViewAdapter adapter;
-    TextView tvPlaylistName, tvPlaylistDate;
-    ImageView ivPlaylistThumb;
-    AppViewModel appViewModel;
-    PlaylistDao playlistDao;
-    int playlistId;
-    PlaySongService service;
-    SongDao songDao;
-    AppDatabase db;
-    List<Song> songList;
-    PlaylistWithSongs playlistWithSongs;
+    private RecyclerView playlistView;
+    private LibraryViewAdapter adapter;
+    private TextView tvPlaylistName, tvPlaylistDate;
+    private ImageView ivPlaylistThumb;
+    private AppViewModel appViewModel;
+    private PlaylistDao playlistDao;
+    private int playlistId;
+    private PlaySongService service;
+    private SongDao songDao;
+    private AppDatabase db;
+    private List<Song> songList;
+    private PlaylistWithSongs playlistWithSongs;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +72,6 @@ public class PlaylistFragment extends Fragment implements LibraryViewAdapter.OnS
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View root = inflater.inflate(R.layout.fragment_playlist, container, false);
         // init views
         playlistView = root.findViewById(R.id.rvPlaylist);
@@ -84,6 +80,7 @@ public class PlaylistFragment extends Fragment implements LibraryViewAdapter.OnS
         ivPlaylistThumb = root.findViewById(R.id.iv_playlist_thumb);
         progressBar = root.findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.GONE);
+
         //
         observerLiveDataChangeListener();
         //
@@ -105,13 +102,8 @@ public class PlaylistFragment extends Fragment implements LibraryViewAdapter.OnS
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void callPlayingService(int position) {
-//        for (Song song :
-//                songList) {
-//            song.setUri(Uri.parse(song.getUriPath()));
-//        }
         AppCache.PLAYING_PLAYLIST = songList;
         service = PlaySongService.getInstance();
         if (service == null) {

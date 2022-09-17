@@ -25,13 +25,13 @@ import java.util.List;
 //@NoArgsConstructor
 public class PlaySongService extends Service {
 
-    MediaPlayer player = null;
+   private MediaPlayer player = null;
     public static PlaySongService instance;
-    int playingPosition;
-    Context applicationContext;
-    Song playingSong;
-    List<Song> playList = null;
-    AppViewModel viewModel;
+    private   int playingPosition;
+    private  Context applicationContext;
+    private Song playingSong;
+    private  List<Song> playList = null;
+    private AppViewModel viewModel;
 
     public PlaySongService() {
     }
@@ -77,7 +77,6 @@ public class PlaySongService extends Service {
         return START_STICKY;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void play(int songPosition) {
         if (this.player != null) {
             removePlayer();
@@ -111,18 +110,7 @@ public class PlaySongService extends Service {
         return;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void next() {
-//        if (playingPosition < AppCache.PLAYING_PLAYLIST.size() - 1) {
-//            try {
-//                play(playingPosition + 1);
-//                return;
-//            } catch (Exception e) {
-//                play(playingPosition + 2);
-//                return;
-//            }
-//        }
-//        play(0);
         if (playingPosition == AppCache.PLAYING_PLAYLIST.size() - 1) {
             play(0);
         } else {
@@ -132,7 +120,6 @@ public class PlaySongService extends Service {
         return;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void prev() {
         if (playingPosition >= 1) {
             play(playingPosition - 1);

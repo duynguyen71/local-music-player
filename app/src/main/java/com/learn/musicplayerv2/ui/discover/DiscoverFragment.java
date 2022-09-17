@@ -121,7 +121,8 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener, 
 
 
     public class GetAppDatabase extends AsyncTask<Void, Void, LiveData<List<PlaylistEntity>>> {
-        AppDatabase db;
+
+       private AppDatabase db;
 
         @Override
         protected void onPreExecute() {

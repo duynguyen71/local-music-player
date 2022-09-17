@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/item_removePlaylist"
-        android:title="Remove" />
+        android:title="Delete" />
     <item
         android:id="@+id/item_changeNamePlaylist"
         android:title="Changename" />

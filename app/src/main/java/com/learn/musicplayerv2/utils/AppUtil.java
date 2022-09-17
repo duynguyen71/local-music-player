@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
+import com.learn.musicplayerv2.AppCache;
 import com.learn.musicplayerv2.model.Song;
 
 import org.jetbrains.annotations.Nullable;
@@ -18,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppUtil {
+    static final String TAG = AppUtil.class.getName();
 
     public static List<Song> findAllLibrarySong(Context context) {
-
+        Log.i(TAG, "findAllLibrarySong: ");
         List<Song> rs = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         ContentResolver resolver = context.getContentResolver();
@@ -36,60 +39,38 @@ public class AppUtil {
                 int albumIdCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
                 int dataCol = c.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
 
-//                Uri u = Uri.parse(String.valueOf(Uri.fromFile(new File(c.getString(dataCol)))));
-
                 song.setSongId(c.getInt(indexCol));
                 song.setName(c.getString(nameCol));
                 song.setArtist(c.getString(artistCol));
                 song.setAlbum(c.getString(albumCol));
-//                String alID = c.getString(albumIdCol);
-                song.setAlbumId(c.getInt(albumIdCol));
-//                song.setUri(u);
+                song.setAlbumId(c.getLong(albumIdCol));
                 song.setUriPath(String.valueOf(Uri.fromFile(new File(c.getString(dataCol)))));
-
-
-//                Bitmap bitmap = toBitmap(context, alID);
-//                try {
-//                    Bitmap bitmap = getBitmap(context, c, albumIdCol);
-//                song.setImage(bitmap);
-//                } catch (IOException e) {
-////                    e.printStackTrace();
-//                }
 
                 rs.add(song);
 
             } while (c.moveToNext());
         }
+        Log.i(TAG, "findAllLibrarySong: "+rs);
         c.close();
-        //SAVE TO APP CACHE
-//        AppCache.LIBRARY_SONGS = rs;
-//        AppCache.ALL_SONGS = rs;
         return rs;
 
     }
 
     @Nullable
-    public static Bitmap toBitmap(Context context, int alID) {
+    public static Bitmap toBitmap(Context context, Long alID) {
         Uri sArtworkUri = Uri
                 .parse("content://media/external/audio/albumart");
-        Uri albumArtUri = ContentUris.withAppendedId(sArtworkUri,(long) alID);
+        Uri albumArtUri = ContentUris.withAppendedId(sArtworkUri, alID);
         Bitmap bitmap;
         try {
             bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), albumArtUri);
             return bitmap;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-    private static Bitmap getBitmap(Context context, Cursor c, int albumIdCol) throws IOException {
-        Uri sArtworkUri = Uri
-                .parse("content://media/external/audio/albumart");
-        Uri albumArtUri = ContentUris.withAppendedId(sArtworkUri, c.getInt(albumIdCol));
-        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), albumArtUri);
-        return bitmap;
-    }
 
     public static Song findSongByPosition(List<Song> songs, int pos) {
         for (int i = 0; i < songs.size(); i++) {
@@ -100,7 +81,4 @@ public class AppUtil {
         return null;
     }
 
-    public static Song findSongById(List<Song> songs, int... songIds) {
-        return null;
-    }
 }

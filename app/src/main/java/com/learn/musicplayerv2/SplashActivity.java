@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class SplashActivity extends AppCompatActivity {
 
     static final int CODE = BuildConfig.VERSION_CODE;

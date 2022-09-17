@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.learn.musicplayerv2.ui.libralry.LibraryFragment"
+        android:name="com.learn.musicplayerv2.ui.library.LibraryFragment"
         android:label="@string/title_library"
         tools:layout="@layout/fragment_library">
         <action
